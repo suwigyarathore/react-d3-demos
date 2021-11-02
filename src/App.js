@@ -1,11 +1,10 @@
-
-import './App.css';
-import { StyledBar } from './bar-4'
+import "./App.css";
+import { StyledBar } from "./bar-4";
 
 function App() {
   return (
     <div className="App">
-        <StyledBar/>
+      <StyledBar />
     </div>
   );
 }
