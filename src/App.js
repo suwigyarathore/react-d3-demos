@@ -1,10 +1,10 @@
 import "./App.css";
-import { StyledBar } from "./bar-4";
+import { StyledScatter } from "./scatter-5";
 
 function App() {
   return (
     <div className="App">
-      <StyledBar />
+      <StyledScatter />
     </div>
   );
 }

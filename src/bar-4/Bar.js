@@ -24,13 +24,14 @@ export const StyledBar = () => {
   const yScale =
     barData &&
     scaleBand()
-      .domain(barData.map((d) => d.Country))
+      .domain(barData.map(yValue))
       .range([0, innerHeight])
       .paddingInner(0.5);
+
   const xScale =
     barData &&
     scaleLinear()
-      .domain([0, max(barData, (d) => d.Population)])
+      .domain([0, max(barData, xValue)])
       .range([0, innerWidth]);
 
   const dataAvailable = barData && yScale && xScale;
