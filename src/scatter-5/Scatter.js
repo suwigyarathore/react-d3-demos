@@ -26,19 +26,16 @@ const yAxisLabel = "Sepal Width";
 export const StyledScatter = () => {
   const scatterData = useData();
 
-  const xScale =
-    scatterData &&
-    scaleLinear()
-      .domain(extent(scatterData, xValue))
-      .range([0, innerWidth])
-      .nice();
+  if (!scatterData) return <h3>Loading...</h3>;
 
-  const yScale =
-    scatterData &&
-    scaleLinear().domain(extent(scatterData, yValue)).range([0, innerHeight]);
+  const xScale = scaleLinear()
+    .domain(extent(scatterData, xValue))
+    .range([0, innerWidth])
+    .nice();
 
-  const dataAvailable = scatterData && yScale && xScale;
-  if (!dataAvailable) return <h3>Loading...</h3>;
+  const yScale = scaleLinear()
+    .domain(extent(scatterData, yValue))
+    .range([0, innerHeight]);
 
   return (
     <svg width={width} height={height}>

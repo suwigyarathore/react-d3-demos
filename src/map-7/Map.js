@@ -9,8 +9,7 @@ const height = 500;
 export const StyledMap = () => {
   const mapData = useData();
 
-  const dataAvailable = mapData;
-  if (!dataAvailable) return <h3>Loading...</h3>;
+  if (!mapData) return <h3>Loading...</h3>;
 
   return (
     <svg width={width} height={height}>

@@ -26,19 +26,17 @@ const yAxisLabel = "Temperature";
 export const StyledLine = () => {
   const lineData = useData();
 
-  const xScale =
-    lineData &&
-    scaleTime().domain(extent(lineData, xValue)).range([0, innerWidth]).nice();
+  if (!lineData) return <h3>Loading...</h3>;
 
-  const yScale =
-    lineData &&
-    scaleLinear()
-      .domain(extent(lineData, yValue))
-      .range([innerHeight, 0])
-      .nice();
+  const xScale = scaleTime()
+    .domain(extent(lineData, xValue))
+    .range([0, innerWidth])
+    .nice();
 
-  const dataAvailable = lineData && yScale && xScale;
-  if (!dataAvailable) return <h3>Loading...</h3>;
+  const yScale = scaleLinear()
+    .domain(extent(lineData, yValue))
+    .range([innerHeight, 0])
+    .nice();
 
   return (
     <svg width={width} height={height}>

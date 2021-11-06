@@ -17,19 +17,15 @@ const xValue = (d) => d.Population;
 
 export const BetterBar = () => {
   const barData = useData();
-  const yScale =
-    barData &&
-    scaleBand()
-      .domain(barData.map((d) => d.Country))
-      .range([0, innerHeight]);
-  const xScale =
-    barData &&
-    scaleLinear()
-      .domain([0, max(barData, (d) => d.Population)])
-      .range([0, innerWidth]);
+  if (!barData) return <h3>Loading...</h3>;
 
-  const dataAvailable = barData && yScale && xScale;
-  if (!dataAvailable) return <h3>Loading...</h3>;
+  const yScale = scaleBand()
+    .domain(barData.map((d) => d.Country))
+    .range([0, innerHeight]);
+  const xScale = scaleLinear()
+    .domain([0, max(barData, (d) => d.Population)])
+    .range([0, innerWidth]);
+
   return (
     <svg width={width} height={height}>
       <g transform={`translate(${margin.left}, ${margin.top})`}>
