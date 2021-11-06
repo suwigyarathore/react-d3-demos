@@ -1,0 +1,9 @@
+.marks circle {
+  fill: #137b80;
+}
+.marks path {
+  stroke: #137b80;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
