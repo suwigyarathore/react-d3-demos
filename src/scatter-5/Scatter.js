@@ -26,8 +26,6 @@ const yAxisLabel = "Sepal Width";
 export const StyledScatter = () => {
   const scatterData = useData();
 
-  console.log(scatterData);
-
   const xScale =
     scatterData &&
     scaleLinear()
