@@ -32,7 +32,10 @@ export const StyledLine = () => {
 
   const yScale =
     lineData &&
-    scaleLinear().domain(extent(lineData, yValue)).range([innerHeight, 0]);
+    scaleLinear()
+      .domain(extent(lineData, yValue))
+      .range([innerHeight, 0])
+      .nice();
 
   const dataAvailable = lineData && yScale && xScale;
   if (!dataAvailable) return <h3>Loading...</h3>;
@@ -44,7 +47,7 @@ export const StyledLine = () => {
           xScale={xScale}
           innerHeight={innerHeight}
           tickFormat={xTickFormat}
-          tickOffset={5}
+          tickOffset={7}
         />
         <text
           className="axis-label"
@@ -55,7 +58,7 @@ export const StyledLine = () => {
         >
           {yAxisLabel}
         </text>
-        <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
+        <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={7} />
         <text
           className="axis-label"
           x={innerWidth / 2}
