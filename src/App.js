@@ -1,10 +1,10 @@
 import "./App.css";
-import { StyledLine } from "./line-6";
+import { StyledMap } from "./map-7";
 
 function App() {
   return (
     <div className="App">
-      <StyledLine />
+      <StyledMap />
     </div>
   );
 }
