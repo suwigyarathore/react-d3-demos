@@ -24,6 +24,7 @@ const innerHeight = height - margin.top - margin.bottom;
 const circleRadius = 7;
 const xTickFormat = (n) => format("0.2s")(n).replace("G", "B");
 const colorLegendLabel = "Species";
+const fadeOpacity = 0.2;
 
 const initialXAttribute = "petal_length";
 
@@ -47,6 +48,8 @@ export const ColoredScatterMenu = () => {
   const [yAttribute, setYAttribute] = useState(initialYAttribute);
   const yValue = (d) => d[yAttribute];
 
+  const [hoveredValue, setHoveredValue] = useState(null);
+
   if (!coloredScatterData) return <h3>Loading...</h3>;
 
   const xScale = scaleLinear()
@@ -62,6 +65,10 @@ export const ColoredScatterMenu = () => {
   const colorScale = scaleOrdinal()
     .domain(coloredScatterData.map(colorValue))
     .range(["#E6842A", "#137B80", "#8E6C8A"]);
+
+  const filteredData = coloredScatterData.filter(
+    (d) => hoveredValue === colorValue(d)
+  );
 
   return (
     <>
@@ -106,8 +113,21 @@ export const ColoredScatterMenu = () => {
             >
               {getLabel(xAttribute)}
             </text>
+            <g opacity={hoveredValue ? fadeOpacity : 1}>
+              <Marks
+                data={coloredScatterData}
+                xScale={xScale}
+                xValue={xValue}
+                yScale={yScale}
+                yValue={yValue}
+                colorScale={colorScale}
+                colorValue={colorValue}
+                tooltipFormat={xTickFormat}
+                circleRadius={circleRadius}
+              />
+            </g>
             <Marks
-              data={coloredScatterData}
+              data={filteredData}
               yScale={yScale}
               xScale={xScale}
               xValue={xValue}
@@ -128,6 +148,9 @@ export const ColoredScatterMenu = () => {
             tickTextOffset={12}
             tickSize={circleRadius}
             colorScale={colorScale}
+            onHover={setHoveredValue}
+            hoveredValue={hoveredValue}
+            fadeOpacity={fadeOpacity}
           />
         </g>
       </svg>
