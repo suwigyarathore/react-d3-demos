@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { scaleLinear, scaleOrdinal } from "d3-scale";
 import { format } from "d3-format";
-import { useData } from "./data";
+import { useData } from "./useData";
 import { extent } from "d3-array";
 import "./tick.css";
 import { AxisLeft } from "./AxisLeft";
