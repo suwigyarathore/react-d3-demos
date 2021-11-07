@@ -8,6 +8,8 @@ import { AxisLeft } from "./AxisLeft";
 import { AxisBottom } from "./AxisBottom";
 import { Marks } from "./Marks";
 import { Dropdown } from "./Dropdown";
+import ReactDropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 const width = 960;
 const menuHeight = 75;
@@ -54,20 +56,20 @@ export const StyledScatterMenu = () => {
 
   return (
     <>
-      <label htmlFor="x-select">X:</label>
-      <Dropdown
-        id="x-select"
-        options={attributes}
-        selectedValue={xAttribute}
-        onSelectedValueChange={setXAttribute}
-      ></Dropdown>
-      <label htmlFor="y-select">Y:</label>
-      <Dropdown
-        id="y-select"
-        options={attributes}
-        selectedValue={yAttribute}
-        onSelectedValueChange={setYAttribute}
-      ></Dropdown>
+      <div className="menu-container">
+        <span className="dropdown-label">X:</span>
+        <ReactDropdown
+          options={attributes}
+          value={xAttribute}
+          onChange={({ value }) => setYAttribute(value)}
+        ></ReactDropdown>
+        <span className="dropdown-label">Y:</span>
+        <ReactDropdown
+          options={attributes}
+          value={yAttribute}
+          onChange={({ value }) => setYAttribute(value)}
+        ></ReactDropdown>
+      </div>
       <br />
       <svg width={width} height={height}>
         <g transform={`translate(${margin.left}, ${margin.top})`}>

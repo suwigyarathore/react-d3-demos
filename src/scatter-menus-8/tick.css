@@ -7,18 +7,21 @@
   font-family: "Poppins", sans-serif;
 }
 
-.axis-label {
+.axis-label,
+.dropdown-label {
   fill: #635f5d;
+  color: #635f5d;
   font-family: "Poppins", sans-serif;
   font-size: 2.5em;
 }
 
-label,
-select {
-  font-family: "Poppins", sans-serif;
-  font-size: 3em;
+.Dropdown-root {
+  width: 300px;
+  display: inline-block;
 }
 
-select option {
-  font-size: 1em;
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
