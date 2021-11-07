@@ -1,0 +1,27 @@
+.tick line {
+  stroke: #c0c0bb;
+}
+
+.tick text {
+  fill: #635f5d;
+  font-family: "Poppins", sans-serif;
+}
+
+.axis-label,
+.dropdown-label {
+  fill: #635f5d;
+  color: #635f5d;
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5em;
+}
+
+.Dropdown-root {
+  width: 300px;
+  display: inline-block;
+}
+
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
