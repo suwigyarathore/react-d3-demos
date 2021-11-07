@@ -1,5 +1,4 @@
 import React from "react";
-import "./Marks.css";
 
 export const Marks = ({
   data,

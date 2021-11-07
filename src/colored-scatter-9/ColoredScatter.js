@@ -10,7 +10,9 @@ import { Marks } from "./Marks";
 import { Dropdown } from "./Dropdown";
 import ReactDropdown from "react-dropdown";
 import "react-dropdown/style.css";
+import { ColorLegend } from "./ColorLegend";
 
+const outerWidth = 1200;
 const width = 960;
 const menuHeight = 75;
 const height = 500 - menuHeight;
@@ -19,7 +21,9 @@ const xAxisLabelOffset = 50;
 const yAxisLabelOffset = 45;
 const innerWidth = width - margin.left - margin.right;
 const innerHeight = height - margin.top - margin.bottom;
+const circleRadius = 7;
 const xTickFormat = (n) => format("0.2s")(n).replace("G", "B");
+const colorLegendLabel = "Species";
 
 const initialXAttribute = "petal_length";
 
@@ -55,11 +59,9 @@ export const ColoredScatterMenu = () => {
     .range([0, innerHeight]);
 
   const colorValue = (d) => d.species;
-  const colorScale = scaleOrdinal(coloredScatterData.map(colorValue)).range([
-    "#e6842a",
-    "#137b80",
-    "#8e6c8a",
-  ]);
+  const colorScale = scaleOrdinal()
+    .domain(coloredScatterData.map(colorValue))
+    .range(["#E6842A", "#137B80", "#8E6C8A"]);
 
   return (
     <>
@@ -77,43 +79,55 @@ export const ColoredScatterMenu = () => {
           onChange={({ value }) => setYAttribute(value)}
         ></ReactDropdown>
       </div>
-      <br />
-      <svg width={width} height={height}>
-        <g transform={`translate(${margin.left}, ${margin.top})`}>
-          <AxisBottom
-            xScale={xScale}
-            innerHeight={innerHeight}
-            tickFormat={xTickFormat}
-            tickOffset={5}
-          />
-          <text
-            className="axis-label"
-            textAnchor="middle"
-            transform={`translate(${-yAxisLabelOffset},${
-              innerHeight / 2
-            }) rotate(-90)`}
-          >
-            {getLabel(yAttribute)}
+      <svg width={outerWidth} height={height}>
+        <svg width={width}>
+          <g transform={`translate(${margin.left}, ${margin.top})`}>
+            <AxisBottom
+              xScale={xScale}
+              innerHeight={innerHeight}
+              tickFormat={xTickFormat}
+              tickOffset={5}
+            />
+            <text
+              className="axis-label"
+              textAnchor="middle"
+              transform={`translate(${-yAxisLabelOffset},${
+                innerHeight / 2
+              }) rotate(-90)`}
+            >
+              {getLabel(yAttribute)}
+            </text>
+            <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
+            <text
+              className="axis-label"
+              x={innerWidth / 2}
+              y={innerHeight + xAxisLabelOffset}
+              textAnchor="middle"
+            >
+              {getLabel(xAttribute)}
+            </text>
+            <Marks
+              data={coloredScatterData}
+              yScale={yScale}
+              xScale={xScale}
+              xValue={xValue}
+              yValue={yValue}
+              colorScale={colorScale}
+              colorValue={colorValue}
+              tooltipFormat={xTickFormat}
+              circleRadius={7}
+            />
+          </g>
+        </svg>
+        <g transform={`translate(${width + 60}, 60)`}>
+          <text x={35} y={-25} className="axis-label" textAnchor="middle">
+            {colorLegendLabel}
           </text>
-          <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
-          <text
-            className="axis-label"
-            x={innerWidth / 2}
-            y={innerHeight + xAxisLabelOffset}
-            textAnchor="middle"
-          >
-            {getLabel(xAttribute)}
-          </text>
-          <Marks
-            data={coloredScatterData}
-            yScale={yScale}
-            xScale={xScale}
-            xValue={xValue}
-            yValue={yValue}
+          <ColorLegend
+            tickSpacing={22}
+            tickTextOffset={12}
+            tickSize={circleRadius}
             colorScale={colorScale}
-            colorValue={colorValue}
-            tooltipFormat={xTickFormat}
-            circleRadius={7}
           />
         </g>
       </svg>
