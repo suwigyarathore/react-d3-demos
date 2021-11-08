@@ -10,7 +10,6 @@ import "react-dropdown/style.css";
 import { timeFormat } from "d3-time-format";
 import { timeMonths } from "d3-time";
 
-const outerWidth = 1200;
 const width = 960;
 const menuHeight = 75;
 const height = 500 - menuHeight;
@@ -52,46 +51,42 @@ export const MissingMigrantsChart = () => {
     .domain([0, max(binnedData, (d) => d.y)])
     .range([innerHeight, 0]);
 
-  console.log(binnedData);
-
   return (
     <>
-      <svg width={outerWidth} height={height}>
-        <svg width={width}>
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
-            <AxisBottom
-              xScale={xScale}
-              innerHeight={innerHeight}
-              tickFormat={xTickFormat}
-              tickOffset={5}
-            />
-            <text
-              className="axis-label"
-              textAnchor="middle"
-              transform={`translate(${-yAxisLabelOffset},${
-                innerHeight / 2
-              }) rotate(-90)`}
-            >
-              {xAxisLabel}
-            </text>
-            <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
-            <text
-              className="axis-label"
-              x={innerWidth / 2}
-              y={innerHeight + xAxisLabelOffset}
-              textAnchor="middle"
-            >
-              {yAxisLabel}
-            </text>
-            <Marks
-              binnedData={binnedData}
-              yScale={yScale}
-              xScale={xScale}
-              tooltipFormat={xTickFormat}
-              innerheight={innerHeight}
-            />
-          </g>
-        </svg>
+      <svg width={width} height={height}>
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+          <AxisBottom
+            xScale={xScale}
+            innerHeight={innerHeight}
+            tickFormat={xTickFormat}
+            tickOffset={5}
+          />
+          <text
+            className="axis-label"
+            textAnchor="middle"
+            transform={`translate(${-yAxisLabelOffset},${
+              innerHeight / 2
+            }) rotate(-90)`}
+          >
+            {xAxisLabel}
+          </text>
+          <AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
+          <text
+            className="axis-label"
+            x={innerWidth / 2}
+            y={innerHeight + xAxisLabelOffset}
+            textAnchor="middle"
+          >
+            {yAxisLabel}
+          </text>
+          <Marks
+            binnedData={binnedData}
+            yScale={yScale}
+            xScale={xScale}
+            tooltipFormat={xTickFormat}
+            innerheight={innerHeight}
+          />
+        </g>
       </svg>
     </>
   );
