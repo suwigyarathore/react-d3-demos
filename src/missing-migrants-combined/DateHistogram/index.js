@@ -8,8 +8,8 @@ import { AxisLeft } from "./AxisLeft";
 import { Marks } from "./Marks";
 import "./tick.css";
 
-const margin = { top: 0, right: 30, bottom: 20, left: 45 };
-const xAxisLabelOffset = 54;
+const margin = { top: 0, right: 30, bottom: 30, left: 45 };
+const xAxisLabelOffset = 30;
 const yAxisLabelOffset = 30;
 const xTickFormat = timeFormat("%m/%d/%Y");
 export const DateHistogram = ({ data, height, width }) => {

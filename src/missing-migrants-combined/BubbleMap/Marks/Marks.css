@@ -8,7 +8,8 @@
   fill: none;
   stroke: #d9dfe0;
 }
-.marks .graticules {
+.marks .graticules,
+.tick line {
   fill: none;
   stroke: #ececec;
 }
