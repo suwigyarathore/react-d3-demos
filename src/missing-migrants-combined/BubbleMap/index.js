@@ -1,26 +1,23 @@
 import { max } from "d3-array";
 import { scaleSqrt } from "d3-scale";
-import React from "react";
+import React, { useMemo } from "react";
 import { Marks } from "./Marks";
-import { useWorldAtlas } from "../useWorldAtlas";
+const sizeValue = (d) => d["Total Dead and Missing"];
+const maxRadius = 15;
 
-export const BubbleMap = ({ data }) => {
-  const worldAtlasData = useWorldAtlas();
-  const sizeValue = (d) => d["Total Dead and Missing"];
-  const maxRadius = 15;
-
-  const dataAvailable = worldAtlasData && data;
-
-  if (!dataAvailable) return <h3>Loading...</h3>;
-
-  const sizeScale = scaleSqrt()
-    .domain([0, max(data, sizeValue)])
-    .range([0, maxRadius]);
+export const BubbleMap = ({ worldAtlasData, data, filteredData }) => {
+  const sizeScale = useMemo(
+    () =>
+      scaleSqrt()
+        .domain([0, max(data, sizeValue)])
+        .range([0, maxRadius]),
+    [data, sizeValue, maxRadius]
+  );
 
   return (
     <Marks
       worldAtlas={worldAtlasData}
-      data={data}
+      data={filteredData}
       sizeScale={sizeScale}
       sizeValue={sizeValue}
     />

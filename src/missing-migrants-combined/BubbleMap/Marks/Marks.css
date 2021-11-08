@@ -3,6 +3,7 @@
 }
 .marks .sphere {
   fill: #fbfbfb;
+  transition: all 0.5s ease;
 }
 .marks .interiors {
   fill: none;
