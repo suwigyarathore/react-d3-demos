@@ -1,13 +1,15 @@
 import "./App.css";
 
-import { StyledMap } from "./map-10";
+import { MissingMigrantsChart } from "./missing-migrants-bar";
+import { MissingMigrantsMap } from "./missing-migrants-map";
 
 function App() {
   return (
     <div className="App">
       {/* <ColoredScatterMenu /> */}
       {/* <StyledScatterMenu /> */}
-      <StyledMap />
+      <MissingMigrantsChart />
+      <MissingMigrantsMap />
     </div>
   );
 }

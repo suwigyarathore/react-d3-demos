@@ -1,0 +1,10 @@
+.tick line {
+  stroke: #c0c0bb;
+}
+.tick text {
+  fill: #635f5d;
+}
+.axis-label {
+  font-size: 2.2em;
+  fill: #635f5d;
+}
